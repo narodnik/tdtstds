@@ -3,13 +3,19 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to DarkFutures's documentation!
-=======================================
+The DarkFutures Tutorial
+========================
+
+Welcome to the online version of The DarkFutures Tutorial, a free tutorial on
+creating anonymous futures, options and other derivatives for cryptocurrency.
 
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
 
+   introduction
+   quickstart
+   overview
 
 
 Indices and tables

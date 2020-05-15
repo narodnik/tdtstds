@@ -21,6 +21,8 @@ project = 'DarkFutures'
 copyright = '2020, Amir Taaki'
 author = 'Amir Taaki'
 
+master_doc = 'index'
+
 
 # -- General configuration ---------------------------------------------------
 

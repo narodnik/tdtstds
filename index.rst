@@ -10,8 +10,8 @@ Welcome to the online version of The DarkFutures Tutorial, a free tutorial on
 creating anonymous futures, options and other derivatives for cryptocurrency.
 
 .. toctree::
-   :maxdepth: 2
    :caption: Contents:
+   :numbered:
 
    introduction
    quickstart

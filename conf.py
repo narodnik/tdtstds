@@ -22,7 +22,8 @@ copyright = '2020, Amir Taaki'
 author = 'Amir Taaki'
 
 master_doc = 'index'
-
+highlight_language = "rust"
+#primary_domain = "rust"
 
 # -- General configuration ---------------------------------------------------
 

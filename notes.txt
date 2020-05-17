@@ -1,0 +1,38 @@
+intro
+- design
+- theory
+quickstart
+overview
+- coconut credentials
+-- properties
+-- selective reveal
+- confidential transactions
+- schnorr proofs
+- core concepts
+-- tokens
+-- transactions
+--- theory
+--- practice: deposit
+--- practice: split
+-- services
+
+transaction
+- deposit, split, merge, withdraw
+confidential transactions
+- pedersen commits
+- hiding amounts
+zero knowledge proofs
+- proving validity
+-- example syntax of a proof
+- rangeproofs
+signature services
+blinded tokens
+potential applications
+- voting
+- filesystem
+- chat group
+(combine them for wiki)
+- dao token system
+- anonymous wallet
+- derivatives platform
+

@@ -16,6 +16,7 @@ creating anonymous futures, options and other derivatives for cryptocurrency.
    introduction
    quickstart
    overview
+   transaction
 
 
 Indices and tables

@@ -24,6 +24,16 @@ Generally the API focuses on implementation simplicity and only implements the b
 
 **Classes do not implement more functionality than is neccessary.**
 
+Anonymity
+=========
+
+We define a cryptocurrency scheme which is anonymous to have 2 primary properties:
+
+* There is no link between transactions, with the anonymity set being infinite (the entire chain).
+* Amounts being transacted are completely anonymous.
+
+Additionally other metadata such as network traffic should be anonymized through mixnetworks.
+
 Theory
 ======
 

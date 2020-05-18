@@ -93,7 +93,7 @@ This system is called **confidential transactions** and enables us to improve th
 Schnorr Zero-Knowledge Proofs
 =============================
 
-The last component we use are a variant of zero-knowledge proofs called schnorr proofs. Zero-knowledge proofs enable us to make statements about variables without revealing their value. These statements can prove that values are constructed in a certain way according to rules that proves their validity.
+The last component we use are a variant of zero-knowledge proofs called schnorr sigma proofs. Zero-knowledge proofs enable us to make statements about variables without revealing their value. These statements can prove that values are constructed in a certain way according to rules that proves their validity.
 
 For example above we introduced the idea of a pedersen commitment. In our system we would actually want to also attach a proof saying that the value encoded in the pedersen commitment, is also the same value stored in our credential.
 
@@ -113,9 +113,69 @@ Now proofs can be combined. For example we also should prove that the value :mat
 
 Don't worry about the formula here. Just know that the value :math:`c_m` represents the token. Here our proof says that the Pedersen commit :math:`C` is a commitment to the same value contained in the credential, and that the Pedersen commit is correctly formed.
 
-The Schnorr Scheme
+The Sigma Protocol
 ------------------
 
-Core Concepts
-=============
+There are 3 stages in generating the sigma zero-knowledge proofs used in DarkFutures.
+
+* **Commitment**
+* **Challenge**
+* **Response**
+
+The sigma protocol is synonymous with schnorr signatures (they are the same).
+
+We provide the simplest proof here which is a proof that :math:`P = dG` or more formally:
+
+.. math::
+
+   \pi = \{(d): P = xG\}
+
+The first round we generate a random secret, and commit to this value without revealing what is it. We call this the **commitment** stage.
+
+.. math::
+
+    \operatorname{random} k
+
+    R = kG
+
+Then we get given a random value from the counterparty we are generating the proof for. This is the **challenge** step.
+
+Now instead of waiting for a random value everytime we want to make our proof, we can also use a trick using what is called a *one-way function*. We use a hash function as this since they cannot be reversed.
+
+.. math::
+
+    c = H(R)
+
+Finally we create the **response**.
+
+.. math::
+
+    s = k + cx
+
+The final signature is the values :math:`(c, s)`
+
+To verify the proof, anybody can check it's valid by running these equations:
+
+.. math::
+
+    R &= sG - cP \\
+    c &\stackrel{?}{=} H(R)
+
+This is true because :math:`s = k + cx` and multiplying by :math:`G` gives us :math:`sG = kG + cxG`. Substituting in :math:`R = kG` and :math:`P = xG`, we get:
+
+.. math::
+
+   sG = R + cP
+
+Rearranging to make :math:`R` the subject, we can then see if the proof is valid by seeing if hashing :math:`R` gives us the same challenge value :math:`c` that was provided by the proof.
+
+This proof can only be generated if somebody possesses secret information for :math:`P = xG`. The one-way function ensures that the value :math:`k` is truly random.
+
+Another fact to understand is that we cannot compute :math:`x` from :math:`s` because given an equation of the form:
+
+.. math::
+
+   A = Bx + y
+
+Given A and B, it's impossible to find :math:`x` or :math:`y` without knowing at least one of them or another equation that we can substitute in. Also we use :math:`R` in place of :math:`k` but recall that :math:`R = kG`, and elliptic curve functions are irreversible- namely, given :math:`R` and :math:`G`, we cannot find :math:`k`.
 

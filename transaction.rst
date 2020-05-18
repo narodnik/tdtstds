@@ -25,8 +25,36 @@ This is ensured through zero-knowledge proofs.
 Examples
 --------
 
-Practice: Depositing a Token
-============================
+Deposit 100 BTC, send 10 BTC to user A, the rest to ourselves:
+
+::
+
+    Deposits: 100 BTC
+    Outputs:
+    - 10 BTC token
+    - 90 BTC token
+
+Burn a token worth 50 BTC, creating one token worth 5 BTC sending to user A (split operation):
+
+::
+
+    Inputs:
+    - 50 BTC token
+    Outputs:
+    -  5 BTC token
+    - 45 BTC token
+
+Withdraw 2 tokens worth 10 BTC and 4 BTC:
+
+::
+
+    Inputs:
+    - 10 BTC token
+    -  4 BTC token
+    Withdraws: 14 BTC
+
+Deposit a Token
+===============
 
 First create the token secret.
 
@@ -54,8 +82,8 @@ We are depositing 110, so expect a new token of 110 to be minted.
     tx.add_deposit(token_secret.value);
     let output_id = tx.add_output(output);
 
-Practice: Splitting a Token
-===========================
+Sending Payments
+================
 
 Construct a new transaction.
 
@@ -79,4 +107,20 @@ Add them to the transaction.
     let output1_id = tx.add_output(output1);
     let output2_id = tx.add_output(output2);
 
+Here we create the 2 outputs in the same code, but we can imagine this being coordinated among 2 different users each with their own output and token secrets being kept private.
+
+This makes splitting a token the same as a send operation.
+
+Withdraw a Token
+================
+
+This is mostly the same as the deposit stage but in reverse. We add an input representing the coin going out and add a withdrawal representing the money leaving the system.
+
+::
+
+    let mut tx = Transaction::new();
+    let (input, mut input_secret) = Input::new(&coconut, &verify_key, &token, &token_secret);
+
+    // We are wihdrawing a single token
+    tx.add_withdraw(token_secret.value);
 

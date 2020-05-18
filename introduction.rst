@@ -8,6 +8,15 @@ DarkFutures is a crypto library targeted towards the creation of dark bespoke fi
 
 Another core design principle is DarkFutures is not a framework, but a toolkit.  Frameworks hinder development during the latter stages of a development cycle, enforce one style of coding and do not work well with other frameworks.
 
+Motivation
+==========
+
+Derivatives allow trading assets without owning the actual underlying asset. With concepts such as synthetic derivatives, we can even abstract the concept of ownership of asset, or create unheard of asset classes beyond their physical domain. This greatly empowers the cryptocurrency paradigm with a new set of financial primitives for constructing powerful economic systems beyond state control.
+
+The motivation behind DarkFutures is a library for creating anonymous derivatives such as futures. We seek a market which enables custom issuance of financial instruments offering strong anonymity guarantees, and enabling secondary markets. Such a system is an incremental first step towards a generalized dark finance infrastructure.
+
+Apart from the profitable side of running an anonymous derivatives exchange, we will use this system to setup our own financial networks providing liquidity for local projects in line with our overall development plan.
+
 Design
 ======
 

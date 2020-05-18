@@ -93,6 +93,29 @@ This system is called **confidential transactions** and enables us to improve th
 Schnorr Zero-Knowledge Proofs
 =============================
 
+The last component we use are a variant of zero-knowledge proofs called schnorr proofs. Zero-knowledge proofs enable us to make statements about variables without revealing their value. These statements can prove that values are constructed in a certain way according to rules that proves their validity.
+
+For example above we introduced the idea of a pedersen commitment. In our system we would actually want to also attach a proof saying that the value encoded in the pedersen commitment, is also the same value stored in our credential.
+
+There is a special way of writing proofs. For example the proof for our pedersen commitment would look like this:
+
+.. math::
+
+   \pi = \{(v, b): C = vG + bH\}
+
+Here :math:`\pi` is the proof itself, and :math:`(v, b)` are the secret values we don't reveal. What we are saying here is that :math:`C` is constructed in such and such a way.
+
+Now proofs can be combined. For example we also should prove that the value :math:`v` is contained inside the credential.
+
+.. math::
+
+   \pi = \{(v, b, o, s): C = vG + bH_1 \wedge c_m = oG_1 + vH_1 + sH_2\}
+
+Don't worry about the formula here. Just know that the value :math:`c_m` represents the token. Here our proof says that the Pedersen commit :math:`C` is a commitment to the same value contained in the credential, and that the Pedersen commit is correctly formed.
+
+The Schnorr Scheme
+------------------
+
 Core Concepts
 =============
 

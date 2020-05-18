@@ -17,7 +17,10 @@ creating anonymous futures, options and other derivatives for cryptocurrency.
    quickstart
    overview
    transaction
-
+   pedersen
+   zkproof
+   service
+   unblind
 
 Indices and tables
 ==================

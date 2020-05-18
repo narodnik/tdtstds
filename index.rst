@@ -21,6 +21,7 @@ creating anonymous futures, options and other derivatives for cryptocurrency.
    zkproof
    service
    unblind
+   apps
 
 Indices and tables
 ==================

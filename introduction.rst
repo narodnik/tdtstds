@@ -8,6 +8,12 @@ DarkFutures is a crypto library targeted towards the creation of dark bespoke fi
 
 Another core design principle is DarkFutures is not a framework, but a toolkit.  Frameworks hinder development during the latter stages of a development cycle, enforce one style of coding and do not work well with other frameworks.
 
+Glossary
+========
+
+* **Credential**. The digital equivalent of a paper based passport, license, certificate or ticket which grants you access or permission to use a service. Credentials have ownership and prove statements contained inside them.
+* **Threshold**. In cryptography, this has a special meaning for group digital signatures. We say a scheme is M-of-N threshold when there are N signing entities, and M of them are required to generate a valid signature. For example a Bitcoin 2-3 address has a threshold of 2 out of 3 signers. The address requires at least 2 signatures to authorize a spend payment.
+
 Motivation
 ==========
 

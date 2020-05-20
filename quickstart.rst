@@ -8,7 +8,8 @@ We will go more in depth into these concepts during later chapters.
 
 ::
 
-    use darkfutures::*;
+    use darkfutures as df;
+
     fn main() {
         //
         // Initialization
@@ -19,16 +20,21 @@ We will go more in depth into these concepts during later chapters.
         let total_services = 5;
 
         let (secret_keys, verify_key) =
-            generate_keys(number_attributes, threshold_service, total_services);
+            df::generate_keys(number_attributes, threshold_service, total_services);
         let coconut =
-            Coconut::<OsRngInstance>::new(number_attributes, threshold_service, total_services);
+            df::Coconut::<df::OsRngInstance>::new(number_attributes, threshold_service, total_services);
 
         // Create our services that will sign new credentials
         let mut services: Vec<_> = secret_keys
             .into_iter()
             .enumerate()
             .map(|(index, secret)| {
-                SigningService::from_secret(&coconut, secret, verify_key.clone(), (index + 1) as u64)
+                df::SigningService::from_secret(
+                    &coconut,
+                    secret,
+                    verify_key.clone(),
+                    (index + 1) as u64,
+                )
             })
             .collect();
 
@@ -38,15 +44,15 @@ We will go more in depth into these concepts during later chapters.
 
         // wallet: Deposit a new token worth 110 credits
         let token_value = 110;
-        let token_secret = TokenSecret::generate(token_value, &coconut);
+        let token_secret = df::TokenSecret::generate(token_value, &coconut);
 
         println!("Deposit started...");
 
         let token = {
             // wallet: Create a new transaction
-            let mut tx = Transaction::new();
+            let mut tx = df::Transaction::new();
             // wallet: Create a single output
-            let (output, mut output_secret) = Output::new(&coconut, &token_secret);
+            let (output, mut output_secret) = df::Output::new(&coconut, &token_secret);
 
             // wallet: We are depositing 110, so expect a new token of 110 to be minted
             tx.add_deposit(token_secret.value);
@@ -61,7 +67,7 @@ We will go more in depth into these concepts during later chapters.
             // wallet: Now start to generate the proofs
             let output_proof_commits = output_secret.proof_commits();
 
-            let mut hasher = HasherToScalar::new();
+            let mut hasher = df::HasherToScalar::new();
             output_proof_commits.commit(&mut hasher);
             let challenge = hasher.finish();
 
@@ -80,7 +86,11 @@ We will go more in depth into these concepts during later chapters.
                 .iter_mut()
                 .map(|service| match service.process(&tx) {
                     Ok(signatures) => {
-                        println!("Service-{} signed {} tokens", service.index, signatures.len());
+                        println!(
+                            "Service-{} signed {} tokens",
+                            service.index,
+                            signatures.len()
+                        );
                         signatures
                     }
                     Err(err) => {

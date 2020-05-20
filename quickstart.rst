@@ -28,7 +28,7 @@ We will go more in depth into these concepts during later chapters.
             .into_iter()
             .enumerate()
             .map(|(index, secret)| {
-                Service::from_secret(&coconut, secret, verify_key.clone(), (index + 1) as u64)
+                SigningService::from_secret(&coconut, secret, verify_key.clone(), (index + 1) as u64)
             })
             .collect();
 
@@ -78,14 +78,13 @@ We will go more in depth into these concepts during later chapters.
             // service: Each service will now validate and sign the transaction
             let output_signatures: Vec<_> = services
                 .iter_mut()
-                .enumerate()
-                .map(|(index, service)| match service.process(&tx) {
+                .map(|service| match service.process(&tx) {
                     Ok(signatures) => {
-                        println!("Service-{} signed {} tokens", index, signatures.len());
+                        println!("Service-{} signed {} tokens", service.index, signatures.len());
                         signatures
                     }
                     Err(err) => {
-                        panic!("Error occured signing (service={}): {}", index, err);
+                        panic!("Error occured signing (service={}): {}", service.index, err);
                     }
                 })
                 .collect();
@@ -99,3 +98,4 @@ We will go more in depth into these concepts during later chapters.
 
         println!("Deposit finished.");
     }
+

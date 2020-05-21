@@ -71,7 +71,6 @@ We will go more in depth into these concepts during later chapters.
             output_proof_commits.commit(&mut hasher);
             let challenge = hasher.finish();
 
-            // Rust is gay
             std::mem::drop(output_proof_commits);
 
             // wallet: Finish proof and add it to our transaction
